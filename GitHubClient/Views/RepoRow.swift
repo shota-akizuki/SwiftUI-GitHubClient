@@ -1,5 +1,6 @@
-
 import SwiftUI
+
+//リストの中身のViewをRowで表現する
 
 struct RepoRow: View {
     let repo :Repo

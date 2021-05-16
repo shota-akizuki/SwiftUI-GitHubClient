@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A021B29D265181E700477A6C /* APIClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = A021B29C265181E700477A6C /* APIClients.swift */; };
+		A021B2A12651832C00477A6C /* RepoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A021B2A02651832C00477A6C /* RepoListViewModel.swift */; };
+		A021B2A4265183A900477A6C /* RepoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A021B2A3265183A900477A6C /* RepoRepository.swift */; };
 		A04A4155264F921600EA23B8 /* GitHubClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04A4154264F921600EA23B8 /* GitHubClientApp.swift */; };
 		A04A4159264F921600EA23B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A04A4158264F921600EA23B8 /* Assets.xcassets */; };
 		A04A415C264F921600EA23B8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A04A415B264F921600EA23B8 /* Preview Assets.xcassets */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A021B29C265181E700477A6C /* APIClients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClients.swift; sourceTree = "<group>"; };
+		A021B2A02651832C00477A6C /* RepoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewModel.swift; sourceTree = "<group>"; };
+		A021B2A3265183A900477A6C /* RepoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoRepository.swift; sourceTree = "<group>"; };
 		A04A4151264F921600EA23B8 /* GitHubClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A04A4154264F921600EA23B8 /* GitHubClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubClientApp.swift; sourceTree = "<group>"; };
 		A04A4158264F921600EA23B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,6 +51,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A021B29B265181C300477A6C /* APIClients */ = {
+			isa = PBXGroup;
+			children = (
+				A021B29C265181E700477A6C /* APIClients.swift */,
+			);
+			path = APIClients;
+			sourceTree = "<group>";
+		};
+		A021B2A62651895700477A6C /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A021B2A3265183A900477A6C /* RepoRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		A021B2A72651898300477A6C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A021B2A02651832C00477A6C /* RepoListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		A04A4148264F921600EA23B8 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +94,9 @@
 		A04A4153264F921600EA23B8 /* GitHubClient */ = {
 			isa = PBXGroup;
 			children = (
+				A021B2A72651898300477A6C /* ViewModels */,
+				A021B2A62651895700477A6C /* Repository */,
+				A021B29B265181C300477A6C /* APIClients */,
 				A04A4154264F921600EA23B8 /* GitHubClientApp.swift */,
 				A04A4172264F9DC700EA23B8 /* Views */,
 				A04A416A264F969500EA23B8 /* Models */,
@@ -181,12 +214,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A04A4168264F967B00EA23B8 /* User.swift in Sources */,
+				A021B29D265181E700477A6C /* APIClients.swift in Sources */,
 				A04A4176264F9EC400EA23B8 /* Repo+mock.swift in Sources */,
 				A0984C3726505BBB00AED787 /* RepoListView.swift in Sources */,
 				A04A416D264F993F00EA23B8 /* RepoRow.swift in Sources */,
+				A021B2A4265183A900477A6C /* RepoRepository.swift in Sources */,
 				A04A4165264F965800EA23B8 /* Repo.swift in Sources */,
 				A04A4170264F9D5B00EA23B8 /* RepoDetailView.swift in Sources */,
 				A04A417A264F9ED400EA23B8 /* User+mock.swift in Sources */,
+				A021B2A12651832C00477A6C /* RepoListViewModel.swift in Sources */,
 				A04A4155264F921600EA23B8 /* GitHubClientApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

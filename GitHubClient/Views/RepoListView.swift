@@ -8,74 +8,35 @@ enum Stateful<Value> {
     case loaded(Value) // 読み込み完了、読み込まれたデータを保持
 }
 
-class ReposLoader: ObservableObject {
-    @Published private(set) var repos :Stateful<[Repo]> = .idle
-  
-    private var cancellables = Set<AnyCancellable>()
-    
-    func call() {
-        let url = URL(string:"https://api.github.com/orgs/mixigroup/repos")!
-        
-        var urlRequest = URLRequest(url: url)
-        
-        urlRequest.httpMethod = "GET"
-        urlRequest.allHTTPHeaderFields = [
-            "accept":"application/vnd.github.v3+json"
-        ]
-        
-        let reposPublisher = URLSession.shared.dataTaskPublisher(for: urlRequest)
-            .tryMap() { element -> Data in
-                guard let httpResponse = element.response as? HTTPURLResponse,
-                      httpResponse.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                return element.data
-            }
-            .decode(type: [Repo].self, decoder: JSONDecoder())
-        reposPublisher
-            .receive(on: DispatchQueue.main)
-            .handleEvents(receiveSubscription: { [weak self] _ in
-                self?.repos = .loading
-            })
-            .sink(receiveCompletion: { [weak self ]completion in
-                switch completion {
-                case .failure(let error):
-                    self?.repos = .failed(error)
-                case .finished: print("Finished")
-                }
-            }, receiveValue: { [weak self] repos in
-                self?.repos = .loaded(repos)
-            }
-            ).store(in: &cancellables)
-    }
-}
+
+//コンテンツをList表示するView
+//RepoListViewModelのStateをバインドしてリポジトリ一覧を表示
 
 struct RepoListView: View {
-    @StateObject private var reposLoader = ReposLoader()
+    @StateObject private var viewModel = RepoListViewModel()
     var body: some View {
         NavigationView {
             //Groupで複数のViewをまとめる
             Group{
-                switch reposLoader.repos{
-                case .idle, .loading:        ProgressView("loading...")
+                switch viewModel.repos{
+                case .idle, .loading:ProgressView("loading...")
                 case .failed :
                     VStack{
                         Group{
                             Image("GitHubMark")
                                 .resizable()
-                                .frame(width: 120, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .frame(width: 120, height: 120 )
                             Text("Failed to load repositories")
                                 .padding(.top, 4.0)
                         }.opacity(0.4)
                         Button(action: {
-                            reposLoader.call()
+                            viewModel.onRetryTapped()
                         }, label: {
                             Text("Retry")
                                 .fontWeight(.bold)
                         })
                         .padding(.top, 8.0)
-                    }
-                    
+                    }       
                 case let .loaded(repos):
                     if repos.isEmpty {
                         Text("No repositires")
@@ -94,7 +55,7 @@ struct RepoListView: View {
             
         }
         .onAppear {
-            reposLoader.call()
+            viewModel.onAppear()
         }
     }
 }
