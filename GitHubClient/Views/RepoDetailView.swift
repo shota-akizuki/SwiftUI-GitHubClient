@@ -18,11 +18,13 @@ struct RepoDetailView: View {
                     Text(repo.name)
                         .font(.body)
                         .fontWeight(.bold)
-                    Text(repo.description)
-                        .padding(.top, 8.0)
+                    if let description = repo.description {
+                                        Text(description)
+                                            .padding(.top, 4)
+                                    }
                     HStack{
                         Image(systemName: "star")
-                        Text("\(repo.stargazerCount) Stars")
+                        Text("\(repo.stargazersCount) Stars")
                     }
                     .padding(.top, 8.0)
                     Spacer()
