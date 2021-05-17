@@ -3,7 +3,7 @@ import Combine
 
 //Webからデータを取ってくるロジック
 
-struct RepoAPIClients {
+struct RepoAPIClient {
     func getRepos() -> AnyPublisher<[Repo],Error>   {
         let url = URL(string:"https://api.github.com/orgs/mixigroup/repos")!
         var urlRequest = URLRequest(url: url)
